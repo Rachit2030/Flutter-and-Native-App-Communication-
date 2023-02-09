@@ -29,23 +29,15 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-  static const batteryChannel = MethodChannel('material.dart/battery');
-  String batteryLevel = "Waiting...";
+  static const textChannel = MethodChannel('material.dart/battery');
+  String textFromNative = "Waiting...";
 
-  void _incrementCounter() {
+  Future getTextFromNative() async {
+    print("Function getTextFromNative Called");
+
+    final String newText = await textChannel.invokeMethod('getBatteryLevel');
     setState(() {
-      _counter++;
-    });
-  }
-
-  Future getBatteryLevel() async {
-    print("hellp");
-
-    final String newBatteryLevel =
-        await batteryChannel.invokeMethod('getBatteryLevel');
-    setState(() {
-      batteryLevel = '$newBatteryLevel';
+      textFromNative = newText;
     });
   }
 
@@ -60,23 +52,20 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              batteryLevel,
+              textFromNative,
               style: TextStyle(
                 fontSize: 15,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            // Text(
-            //   '$_counter',
-            //   style: Theme.of(context).textTheme.headlineMedium,
-            // ),
           ],
         ),
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton(
-        onPressed: getBatteryLevel,
+        onPressed: getTextFromNative,
         tooltip: 'battery',
-        child: const Icon(Icons.battery_4_bar_rounded),
+        child: const Icon(Icons.app_shortcut_rounded),
       ),
     );
   }

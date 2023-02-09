@@ -10,11 +10,11 @@ import Flutter
       
       let controller: FlutterViewController = window?.rootViewController as! FlutterViewController
       let method_channel_name = "material.dart/battery"
-      let batteryChannel = FlutterMethodChannel(
+      let textChannel = FlutterMethodChannel(
         name: method_channel_name,
         binaryMessenger:controller.binaryMessenger
         )
-      batteryChannel.setMethodCallHandler({
+      textChannel.setMethodCallHandler({
         (call: FlutterMethodCall, result: @escaping FlutterResult)-> Void in 
         switch call.method {
         case "getBatteryLevel": result("HELLO iOS")

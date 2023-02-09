@@ -10,12 +10,12 @@ import android.content.Intent
 
 
 class MainActivity: FlutterActivity() {
-    private val BATTERY_CHANNEL = "material.dart/battery"
+    private val TEXT_CHANNEL = "material.dart/battery"
     private lateinit var channel : MethodChannel
     override fun configureFlutterEngine(@NonNull flutterEngine: FlutterEngine) {
         super.configureFlutterEngine(flutterEngine)
 
-        channel = MethodChannel(flutterEngine.dartExecutor.binaryMessenger,BATTERY_CHANNEL)
+        channel = MethodChannel(flutterEngine.dartExecutor.binaryMessenger,TEXT_CHANNEL)
 
         channel.setMethodCallHandler {   call, result ->
             if (call.method == "getBatteryLevel"){
