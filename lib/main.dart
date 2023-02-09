@@ -53,7 +53,7 @@ class _MyHomePageState extends State<MyHomePage> {
           children: <Widget>[
             Text(
               textFromNative,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 15,
                 fontWeight: FontWeight.bold,
               ),
